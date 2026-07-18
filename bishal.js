@@ -24,13 +24,13 @@
            PREVIEW_BOX.style.display = "block";
     PREVIEW_BOX.innerHTML = `
         <div style="text-align: center; border-bottom: 2px dashed #DDDDDD; padding-bottom: 5px; margin-bottom: 12px;">
-            <b style="color: #555555; font-size: 18px;">TRANSACTION PREVIEW</b>
+            <b style="color: white; font-size: 18px;">TRANSACTION PREVIEW</b>
         </div>
         <b> Flow Type:</b> <span style="color: ${ACCENT_COLOR}; font-weight: bold;">${TRANSACTION_TYPE}</span><br>
         <b> Wallet/Bank:</b> ${PAYMENT_METHOD}<br>
         <b> Net Amount:</b> <span style="font-weight: bold; color: ${ACCENT_COLOR};">Rs. ${AMOUNT_VALUE}</span><br>
         <b> Source/Ref:</b> ${SOURCE_VALUE}
-        document.getElementById
+       
     `;
 });
             FINANCE_FORM.addEventListener('submit', function(EVENT) {
