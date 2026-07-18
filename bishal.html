@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Financial Record</title>
+
+    <link rel="icon" type="image/jpg" href="icon.jpg">
+    <link rel="stylesheet" type="text/css" href="bishal.css">
+   
+</head>
+<body>
+        <div>
+    <h1 id="date">Financial Statement[Bishal Adhikari]</h1>
+       </div>
+       
+    <form id="financeform" method="Post">
+            <label id="typeLabel"> Income/Outcome: 
+                <select id="Type" size="1" >
+                    <option value="Income"> Income </option> 
+                    <option value="Outcome"> Outcome </option>
+                </select>
+            </label>
+                <br>
+            <label id="walletLabel"> Wallet/bank:
+                         <select id="Wallet" size="1" maxlength="10" name="Wallet">
+                         <option value="Esewa "> Esewa </option>
+                         <option value="Khalti"> khalti</option>
+                         <option value="Connectips"> Connectips</option>
+                         <option value="Mobile Banking"> Mobile Banking</option>
+                         <option value="Cash"> Cash</option>
+                </select>   
+            </label>
+                <br>
+          <div>  <label id="amountLabel"> Amount: 
+             <input type="number" step="0.01" placeholder="Amount" id="Amount"> 
+         </label> </div> 
+        <div> <label id="sourceLabel"> Source:
+             <input type="Text" name="Source" id="Source"> 
+         </label> </div>
+            <button type="button" id="previewBtn" >preview </button>
+       <div id="previewbox">
+        
+       </div>
+       <button type="submit" id="submitBtn"> submit</button>
+    
+     </form>  
+    </div>
+      <script src="bishal.js"></script>
+</body>
+</html>
