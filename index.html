@@ -1,57 +1,173 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Financial Record</title>
-
-    <link rel="icon" type="image/jpg" href="icon.jpg">
-    <link rel="stylesheet" type="text/css" href="bishal.css">
-   
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bishal Adhikari — Financial Statement</title>
+  <link rel="icon" type="image/jpg" href="icon.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="bishal.css">
 </head>
 <body>
-    
-     <img src="tt.png" id="pic"> 
 
-        <div>
-    <h1 id="date">Financial Statement[Bishal Adhikari]</h1>
-       </div>
-
-       
-    <form id="financeform" method="Post">
-            <label id="typeLabel"> Income/Outcome: 
-                <select id="Type" size="1" >
-                    <option value="Income"> Income </option> 
-                    <option value="Outcome"> Outcome </option>
-                </select>
-            </label>
-                <br>
-            <label id="walletLabel"> Wallet/bank:
-                         <select id="Wallet" size="1" maxlength="10" name="Wallet">
-                         <option value="Esewa"> Esewa</option>
-                         <option value="Khalti"> khalti</option>
-                         <option value="Connectips"> Connectips</option>
-                         <option value="Bank"> Bank</option>
-                         <option value="Cash"> Cash</option>
-                </select>   
-            </label>
-                <br>
-          <div>  <label id="amountLabel"> Amount: 
-             <input type="number" step="0.01" placeholder="Amount" id="Amount"> 
-         </label> </div> 
-        <div> <label id="sourceLabel"> Source:
-             <input type="Text" name="Source" id="Source"> 
-         </label> </div>
-            <button type="button" id="previewBtn" >preview </button>
-       <div id="previewbox">
-        
-       </div>
-       <button type="submit" id="submitBtn"> submit</button>
-    
-     </form>  
+  <div class="app">
+    <div class="header">
+      <div class="avatar">B</div>
+      <div class="greet">
+        <div class="greet-sub" id="greetTime">Good Morning</div>
+        <div class="greet-name">Bishal</div>
+      </div>
+      <div class="header-icons">
+        <button class="icon-btn" id="infoBtn" title="Statement info">i</button>
+        <button class="icon-btn" id="addBtn" title="Add entry">+</button>
+      </div>
     </div>
 
-       <img src="coin.png" id="image" >
-      <script src="bishal.js"></script>
+    <div class="balance-card">
+      <div class="blob blob-blue"></div>
+      <div class="blob blob-yellow"></div>
+      <div class="blob blob-teal"></div>
+      <div class="balance-label">Total Balance</div>
+      <div class="balance-amt" id="balanceAmt">Rs. 0</div>
+      <div class="balance-foot">
+        <span>My Statement</span>
+        <button class="round-btn" id="downBtn">↓</button>
+      </div>
+    </div>
+
+    <div class="split-card">
+      <div class="blob blob-orange-sm"></div>
+      <div class="split-item">
+        <span class="split-arrow up">↑</span>
+        <div>
+          <div class="split-label">Income</div>
+          <div class="split-val income" id="sumIncome">Rs. 0</div>
+        </div>
+      </div>
+      <div class="split-divider"></div>
+      <div class="split-item">
+        <span class="split-arrow down">↓</span>
+        <div>
+          <div class="split-label">Expenses</div>
+          <div class="split-val outcome" id="sumOutcome">Rs. 0</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-head">
+      <h2>Top expenses</h2>
+      <span class="pill">All time</span>
+    </div>
+    <div class="expense-scroll" id="expenseScroll">
+      <div class="empty-note">Outcome entry थपेपछि देखिन्छ</div>
+    </div>
+
+    <div class="section-head">
+      <h2>Recent entries</h2>
+      <span class="pill" id="savingPill">Saving Rs. 0</span>
+    </div>
+    <div class="entry-list" id="historyList">
+      <div class="empty-note">कुनै entry छैन अहिलेसम्म</div>
+    </div>
+  </div>
+
+  <div class="bottom-nav">
+    <button class="nav-item active" data-tab="home"><span class="nav-ic">🏠</span>Home</button>
+    <button class="nav-item" data-tab="add"><span class="nav-ic">➕</span>Add</button>
+    <button class="nav-item" data-tab="statement"><span class="nav-ic">🧾</span>Statement</button>
+    <button class="nav-item" data-tab="menu"><span class="nav-ic">☰</span>Menu</button>
+  </div>
+
+  <div class="sheet-overlay" id="sheetOverlay"></div>
+  
+  <!-- Add Entry Sheet -->
+  <div class="sheet" id="addSheet">
+    <div class="sheet-handle"></div>
+    <h3>Add Entry</h3>
+
+    <div class="toggle-wrap">
+      <span class="toggle-label income active" id="lblIncome">Income</span>
+      <div class="switch" id="switchToggle">
+        <div class="knob" id="knob">↑</div>
+      </div>
+      <span class="toggle-label outcome" id="lblOutcome">Outcome</span>
+    </div>
+
+    <div class="field">
+      <label>Wallet / Bank</label>
+      <div class="custom-select" id="walletSelect">
+        <button type="button" class="select-trigger" id="walletTrigger">
+          <span class="opt-icon" id="walletIconDisplay"></span>
+          <span id="walletLabelDisplay">eSewa</span>
+          <span class="chev" id="walletChev"></span>
+        </button>
+        <ul class="select-options" id="walletOptionsList"></ul>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Date</label>
+      <input type="date" id="entryDate">
+    </div>
+
+    <div class="field">
+      <label>Amount</label>
+      <input type="number" id="amount" placeholder="Rs. 0.00" inputmode="decimal">
+    </div>
+
+    <div class="field">
+      <label>Source</label>
+      <input type="text" id="source" placeholder="e.g. Freelance, Grocery...">
+    </div>
+
+    <div class="btns">
+      <button class="act btn-preview" id="btnPreview" type="button">Preview</button>
+      <button class="act btn-submit" id="btnSubmit" type="button">Submit</button>
+    </div>
+
+    <div class="preview-box" id="previewBox"></div>
+  </div>
+
+  <!-- Statement Sheet -->
+  <div class="sheet" id="statementSheet">
+    <div class="sheet-handle"></div>
+    <h3>Date-wise Statement</h3>
+    <div id="statementList"><div class="empty-note">कुनै entry छैन अहिलेसम्म</div></div>
+  </div>
+
+  <!-- Goals Sheet -->
+  <div class="sheet" id="goalsSheet">
+    <div class="sheet-handle"></div>
+    <h3>Saving Goals</h3>
+    <div id="goalsList"><div class="empty-note">अहिलेसम्म कुनै goal छैन</div></div>
+
+    <div class="field">
+      <label>Goal type</label>
+      <div class="chip-row" id="goalTypeChips">
+        <button type="button" class="chip active" data-type="House">🏠 House</button>
+        <button type="button" class="chip" data-type="Marriage">💍 Marriage</button>
+        <button type="button" class="chip" data-type="Study">🎓 Study</button>
+        <button type="button" class="chip" data-type="Car">🚗 Car</button>
+        <button type="button" class="chip" data-type="Custom">✏️ Other</button>
+      </div>
+    </div>
+
+    <div class="field" id="goalCustomNameField" style="display:none">
+      <label>Goal name</label>
+      <input type="text" id="goalCustomName" placeholder="e.g. Bike, Laptop...">
+    </div>
+
+    <div class="field">
+      <label>Target amount</label>
+      <input type="number" id="goalTarget" placeholder="Rs. 0" inputmode="decimal">
+    </div>
+
+    <button class="act btn-preview" id="btnAddGoal" type="button">Create Goal</button>
+  </div>
+
+  <div class="toast" id="toast"><span class="dot"></span><span id="toastText"></span></div>
+
+  <script src="script.js"></script>
 </body>
 </html>
